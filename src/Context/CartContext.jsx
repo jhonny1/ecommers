@@ -28,14 +28,21 @@ const addItemToCart = (product) => {
     if(inCart){
         setCartItems(   
             cartItems.map((productInCart) => {
-                if(productInCart.id === product.id){
-                     return {...inCart,Cantidad_disponible: inCart.Cantidad_disponible + 1      }
+                if(productInCart.id > product.Cantidad_disponible ){
+                   return <h1>error cantidad limitada</h1>
+         }
+
+                if(productInCart.id === product.id && inCart.Cantidad_disponible < product.Cantidad_disponible){
+                     return {...inCart,Cantidad_disponible: inCart.Cantidad_disponible + 1}
                 }else return productInCart
             } ) );
     }
     else {
         setCartItems([...cartItems,{ ...product,Cantidad_disponible:1},])
     }}
+
+
+    
 
     const deleteItemToCart = (product) => {
         const inCart = cartItems.find(
